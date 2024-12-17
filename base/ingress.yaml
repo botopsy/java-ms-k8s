@@ -1,0 +1,21 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: java-ms-ingress
+  namespace: java-ms
+  labels:
+    backstage.io/kubernetes-id: java-ms
+spec:
+  rules:
+  - host: java-ms.127.0.0.1.sslip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: java-ms-service
+            port:
+              number: 3000
